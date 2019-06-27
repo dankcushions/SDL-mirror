@@ -227,10 +227,10 @@ RPI_CreateWindow(_THIS, SDL_Window * window)
     uint32_t layer = SDL_RPI_VIDEOLAYER;
     const char *env;
 
-    /* Disable alpha, otherwise the app looks composed with whatever dispman is showing (X11, console,etc) */
-    dispman_alpha.flags = DISPMANX_FLAGS_ALPHA_FIXED_ALL_PIXELS; 
-    dispman_alpha.opacity = 0xFF; 
-    dispman_alpha.mask = 0;
+    /* Discard all lower levels, otherwise any empty parts of the screen show items beneath (X11, console,etc) */
+    dispman_alpha.flags = DISPMANX_FLAGS_ALPHA_DISCARD_LOWER_LAYERS; 
+    //dispman_alpha.opacity = 0xFF; 
+    //dispman_alpha.mask = 0;
 
     /* Allocate window internal data */
     wdata = (SDL_WindowData *) SDL_calloc(1, sizeof(SDL_WindowData));
